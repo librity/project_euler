@@ -1,9 +1,15 @@
-// def sum_of_multiples_of_3_and_5(up_to)
-//   (1...up_to).select { |n| (n % 3).zero? || (n % 5).zero? }.sum
-// end
+// rustc 1.rs -o 1.out && ./1.out
 
 fn sum_of_multiples_of_3_and_5(up_to: i32) -> i32 {
-    return 0;
+    let mut total: i32 = 0;
+
+    for i in 1..up_to {
+        if i % 3 == 0 || i % 5 == 0 {
+            total += i;
+        }
+    }
+
+    return total;
 }
 
 fn main() {
