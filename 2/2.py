@@ -1,21 +1,35 @@
-def fibonnaci(nth: int) -> int:
-    if nth < 2:
-        return 1
+from typing import List
 
-    return fibonnaci(nth - 1) + fibonnaci(nth - 2)
+
+def fibonnaci(nth: int) -> List[int]:
+    if nth <= 0:
+        return []
+    if nth == 1:
+        return [1]
+    if nth == 2:
+        return [1, 2]
+
+    nth = nth - 2
+    fibs = [1, 2]
+    for i in range(0, nth):
+        prev = fibs[-1]
+        prev_prev = fibs[-2]
+        fibs.append(prev + prev_prev)
+
+    return fibs
 
 
 def fibonnaci_even_sum(up_to: int) -> int:
-    total = 0
+    fibs = fibonnaci(up_to)
 
-    for i in range(1, up_to):
-        print(".", end="", flush=True)
-        fib = fibonnaci(i)
+    total = 0
+    for fib in fibs:
         if fib % 2 == 0:
             total += fib
 
-    return fib
+    return total
 
 
 print(fibonnaci(10))
+# print(fibonnaci(1000))
 print(fibonnaci_even_sum(4000000))

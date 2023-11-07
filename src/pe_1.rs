@@ -12,7 +12,8 @@ fn sum_of_multiples_of_3_and_5(up_to: i32) -> i32 {
     return total;
 }
 
-fn main() {
+#[allow(dead_code)]
+pub(crate) fn call() {
     println!(
         "sum_of_multiples_of_3_and_5(10): {}",
         sum_of_multiples_of_3_and_5(10)
