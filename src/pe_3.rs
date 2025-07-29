@@ -38,7 +38,7 @@ fn is_prime(numb: u128) -> bool {
     true
 }
 
-fn prime_factors(numb: u128) -> Vec<u128> {
+fn prime_factors_slow(numb: u128) -> Vec<u128> {
     let mut factors: Vec<u128> = Vec::new();
 
     let primes = calc_primes(numb);
@@ -51,10 +51,28 @@ fn prime_factors(numb: u128) -> Vec<u128> {
     factors
 }
 
-fn largest_prime_factors(numb: u128) -> u128 {
-    let factors: Vec<u128> = prime_factors(numb);
+fn prime_factors(mut numb: u128) -> Vec<u128> {
+    let mut factors: Vec<u128> = Vec::new();
 
-    *factors.last().unwrap()
+    while numb % 2 == 0 {
+        factors.push(2);
+        numb /= 2;
+    }
+
+    let mut divisor = 3;
+    while numb > 1 {
+        while numb % divisor == 0 {
+            factors.push(divisor);
+            numb /= divisor;
+        }
+        divisor += 2;
+    }
+
+    factors
+}
+
+fn largest_prime_factors(numb: u128) -> u128 {
+    prime_factors(numb).pop().unwrap_or(0)
 }
 
 #[allow(dead_code)]
